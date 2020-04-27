@@ -400,8 +400,8 @@
       <div class="header">
         <div class="header htab">
           <div class="triangle"></div>
-          <input class="tab-switch" name="attr_skill_toggle" title="Active skills" type="radio" value="active"/>
-          <h1 data-i18n="active">active..</h1>
+          <input class="tab-switch" name="attr_skill_toggle" title="Active skills" type="radio" value="active" checked/>
+		  <h1 data-i18n="active">active..</h1>
           <div class="right-tri"></div>
         </div>
         <div class="header htab">
@@ -433,7 +433,8 @@
             <div class="rows repeating-container">
               <div class="row-long">
                 <input name="attr_default_display" type="hidden" value="Agility"/>
-                <button data-i18n="default" name="roll_default" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{default}}}{{base=@{default_display}}}{{dice=[[((@{default_attribute}+-1)+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}">untrained skill</button><span class="text-center">-</span>
+                <button data-i18n="default" name="roll_default" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{default}}}{{base=@{default_display}}}{{dice=[[((@{default_attribute}+-1)+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}">untrained skill</button>
+				<span class="text-center">-</span>
                 <select class="attribute-select" name="attr_default_attribute" title="Skill attribute">
                   <option data-i18n="body" value="@{body}">Body</option>
                   <option data-i18n="agility" value="@{agility}" selected="selected">Agility</option>
@@ -450,12 +451,25 @@
               <fieldset class="repeating_active">
                 <input name="attr_display_rating" type="hidden"/>
                 <input name="attr_specialization" type="hidden" value=""/>
+				<input name="attr_expertise" type="hidden" value=""/>
                 <input name="attr_display_attribute" type="hidden" value="Agility"/>
                 <input name="attr_dicepool" type="hidden" value="0"/>
+				<input name="attr_display_skill" type="hidden" value=""/>
                 <input class="settings-flag" name="attr_flag" type="hidden" value="settings" title="@{repeating_active_${x}_flag}"/>
                 <div class="buttons">
-                  <button class="eclipse" name="roll_skill" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{skill}}}{{base=@{display_attribute}}}{{dice=[[((@{dicepool}+@{attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"><span name="attr_skill"></span></button>
-                  <button class="eclipse" name="roll_specialization" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{skill}}}{{base=@{display_attribute}}}{{dice=[[((@{dicepool}+@{attribute}+2)+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=Spec: @{specialization}"><span name="attr_specialization"></span></button>
+                  <button class="eclipse" name="roll_skill" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{skill}}}{{base=@{display_attribute}}}{{dice=[[((@{dicepool}+@{attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}">
+					<span name="attr_skill"></span>
+				  </button>
+                  <button class="eclipse" name="roll_specialization" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{skill}}}{{base=@{display_attribute}}}{{dice=[[((@{dicepool}+@{attribute}+2)+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=Spec: @{specialization}">
+					<span>Spec: 
+						<span name="attr_specialization"></span>
+					</span>
+				  </button>
+				  <button class="eclipse" name="roll_expertise" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{skill}}}{{base=@{display_attribute}}}{{dice=[[((@{dicepool}+@{attribute}+3)+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=Expertise: @{expertise}">
+					<span>Expert: 
+						<span name="attr_expertise"></span>
+					</span>
+				  </button>
                 </div>
 				<span class="text-center" name="attr_display_rating" title="@{repeating_active_${x}_display_rating}"></span>
                 <select class="attribute-select" name="attr_attribute" title="@{repeating_active_${x}_attribute}">
@@ -477,25 +491,25 @@
 				</div>
                 <div class="settings">
                   <select class="skill-select" name="attr_skill" value="Astral" title="@{repeating_active_${x}_skill}">
-					<option value="@{astral}" data-i18n="astral" selected>astral</option>
-					<option value="@{athletics}" data-i18n="athletics">athletics</option>
-					<option value="@{biotech}" data-i18n="biotech">biotech</option>
-					<option value="@{close_combat}" data-i18n="closecombat">close combat</option>
-					<option value="@{con}" data-i18n="con">con</option>
-					<option value="@{conjuring}" data-i18n="conjuring">conjuring</option>
-					<option value="@{cracking}" data-i18n="cracking">cracking</option>
-					<option value="@{electronics}" data-i18n="electronics">electronics</option>
-					<option value="@{enchanting}" data-i18n="enchanting">enchanting</option>
-					<option value="@{engineering}" data-i18n="engineering">engineering</option>
-					<option value="@{exotic_weapons}" data-i18n="exoticweapons">exotic weapons</option>
-					<option value="@{firearms}" data-i18n="firearms">firearms</option>
-					<option value="@{influence}" data-i18n="influence">influence</option>
-					<option value="@{outdoors}" data-i18n="outdoors">outdoors</option>
-					<option value="@{perception}" data-i18n="perception">perception</option>
-					<option value="@{piloting}" data-i18n="piloting">piloting</option>
-					<option value="@{sorcery}" data-i18n="sorcery">sorcery</option>
-					<option value="@{stealth}" data-i18n="stealth">stealth</option>
-					<option value="@{tasking}" data-i18n="tasking">tasking</option>
+					<option value="Astral" data-i18n="astral">astral</option>
+					<option value="Athletics" data-i18n="athletics">athletics</option>
+					<option value="Biotech" data-i18n="biotech">biotech</option>
+					<option value="Close Combat" data-i18n="closecombat">close combat</option>
+					<option value="Con" data-i18n="con">con</option>
+					<option value="Conjuring" data-i18n="conjuring">conjuring</option>
+					<option value="Cracking" data-i18n="cracking">cracking</option>
+					<option value="Electronics" data-i18n="electronics">electronics</option>
+					<option value="Enchanting" data-i18n="enchanting">enchanting</option>
+					<option value="Engineering" data-i18n="engineering">engineering</option>
+					<option value="Exotic Weapons" data-i18n="exoticweapons">exotic weapons</option>
+					<option value="Firearms" data-i18n="firearms">firearms</option>
+					<option value="Influence" data-i18n="influence">influence</option>
+					<option value="Outdoors" data-i18n="outdoors">outdoors</option>
+					<option value="Perception" data-i18n="perception">perception</option>
+					<option value="Piloting" data-i18n="piloting">piloting</option>
+					<option value="Sorcery" data-i18n="sorcery">sorcery</option>
+					<option value="Stealth" data-i18n="stealth">stealth</option>
+					<option value="Tasking" data-i18n="tasking">tasking</option>
                   </select>
                   <label data-i18n-title="rating" title="rating">
                     <input name="attr_rating" min="0" placeholder="0" type="number" title="@{repeating_active_${x}_rating}"/>
@@ -507,6 +521,10 @@
                   <label data-i18n-title="specialization" title="specialization">
 					<span data-i18n="specialization">specialization</span>
                     <input name="attr_specialization" placeholder="Specalizations" type="text" title="@{repeating_active_${x}_specialization}"/>
+                  </label>
+				  <label data-i18n-title="expertise" title="expertise">
+					<span data-i18n="expertise">expertise</span>
+                    <input name="attr_expertise" placeholder="Expertise" type="text" title="@{repeating_active_${x}_expertise}"/>
                   </label>
                   <label data-i18n-title="notes" title="notes">
 					<span data-i18n="notes">Notes</span>
@@ -586,7 +604,7 @@
       </div>
     </div>
   </div>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF RIGHT-HAND COLUMNS ROW ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF RIGHT-HAND COLUMNS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF CORE COMBAT INFO ROW ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div class="core pc-col">
@@ -906,15 +924,15 @@
             <fieldset class="repeating_range">
 				<input name="attr_dicepool" type="hidden" value="0"/>
 				<input class="flag-primary" name="attr_primary" type="hidden" value=""/>
-				<button name="roll_range_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^@{attribute}}}{{dice=[[((@{skill}+@{dicepool}+(@{attribute}))+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{mode}, DV @{damage}, @{close}/@{near}/@{far}/@{extreme}}}">
+				<button name="roll_range_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^{attribute}}}{{dice=[[((@{skill}+@{dicepool}+@{attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{mode}, ATK @{close}/@{near}/@{far}/@{extreme}, DV @{damage}}}">
 					<span name="attr_weapon"></span>
 				</button>
 				<span class="text-center" title="@{repeating_range_${x}_damage}" name="attr_damage"></span>
-				<select name="attr_mode" title="@{repeating_range_${x}_mode}" value="BF">
+				<select name="attr_mode" title="@{repeating_range_${x}_mode}" value="SS">
 					<option data-i18n="bf" value="BF">BF</option>
 					<option data-i18n="fa" value="FA">FA</option>
 					<option data-i18n="sa" value="SA">SA</option>
-					<option data-i18n="ss" value="SS">SS</option>
+					<option data-i18n="ss" value="SS" selected>SS</option>
 					<option data-i18n="other" value="Other">Other</option>
 				</select>
 				<span class="text-center" title="@{repeating_range_${x}_close}" name="attr_close"></span>
@@ -922,28 +940,29 @@
 				<span class="text-center" title="@{repeating_range_${x}_far}" name="attr_far"></span>
 				<span class="text-center" title="@{repeating_range_${x}_extreme}" name="attr_extreme"></span>
 				<span class="text-center" title="@{repeating_range_${x}_ammo}" name="attr_ammo"></span>
-				<input class="collapse-flag" name="attr_display_flag" type="checkbox"/><span class="pictos">i</span>
+				<input class="collapse-flag" name="attr_display_flag" type="checkbox"/>
+				<span class="pictos">i</span>
 				<input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/>
 				<span class="pictos">x</span>
 				<div class="collapse">
 					<span name="attr_notes"></span>
 				</div>
-				<!-- LAST POINT OF EDITING -->
 				<div class="settings">
-					<input name="attr_weapon" placeholder="Ares Predator" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
+					<input name="attr_weapon" placeholder="Ares Predator VI" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
 					<input name="attr_damage" placeholder="3P" title="@{repeating_range_${x}_damage}" type="text" value=""/>
-					<select name="attr_mode" title="@{mode}" value="BF">
+					<select name="attr_mode" title="@{mode}" value="SS">
 						<option data-i18n="bf" value="BF">BF</option>
 						<option data-i18n="fa" value="FA">FA</option>
 						<option data-i18n="sa" value="SA">SA</option>
-						<option data-i18n="ss" value="SS">SS</option>
+						<option data-i18n="ss" value="SS" selected>SS</option>
 						<option data-i18n="other" value="Other">Other</option>
 					</select>
-					<input name="attr_close" placeholder="4" title="@{repeating_range_${x}_close}" type="text" value=""/>
-					<input name="attr_near" placeholder="5" title="@{repeating_range_${x}_near}" type="number" value=""/>
-					<input name="attr_far" placeholder="4" title="@{repeating_range_${x}_far}" type="number" value=""/>
+					<input name="attr_close" placeholder="10" title="@{repeating_range_${x}_close}" type="text" value=""/>
+					<input name="attr_near" placeholder="10" title="@{repeating_range_${x}_near}" type="number" value=""/>
+					<input name="attr_far" placeholder="6" title="@{repeating_range_${x}_far}" type="number" value=""/>
 					<input name="attr_extreme" placeholder="-" title="@{repeating_range_${x}_extreme}" type="number" value=""/>
-					<input name="attr_ammo" placeholder="15" title="@{repeating_range_${x}_ammo}" type="number" value=""/>
+					<input name="attr_ammo" placeholder="15(s)" title="@{repeating_range_${x}_ammo}" type="number" value=""/>
+						<!-- TODO: let user select modes and reflect selection in attr_mode select? -->
 						<label data-i18n-title="modeoptions" title="Mode Options">
 							<span data-i18n="modeoptions">Mode Options</span>
 							<input name="attr_mode_options" placeholder="SA/BF/FA" type="text" title="@{repeating_range_${x}_mode_options}}"/>
@@ -957,7 +976,7 @@
 							<select name="attr_skill" title="@{repeating_range_${x}_skill}" value="@{firearms}">
 								<option value="@{athletics}" data-i18n="athletics">athletics</option>
 								<option value="@{engineering}" data-i18n="engineering">engineering</option>
-								<option value="@{exotic_weapons}" data-i18n="exoticweapons">exotic weapons</option>
+								<option value="0" data-i18n="exoticweapons">exotic weapons</option>
 								<option value="@{firearms}" data-i18n="firearms" selected>firearms</option>
 							</select>
 						</label>
@@ -968,10 +987,10 @@
 								<option data-i18n="logic" value="@{logic}">Logic</option>
 							</select>
 						</label>
-						<label data-i18n-title="specialization" title="specialization">
-							<span data-i18n="specialization">specialization</span>
-							<input name="attr_specialization" value="2" title="@{repeating_range_${x}_specialization}" type="checkbox"/>
-						</label>
+						<span data-i18n="specialization">specialization</span>
+						<input name="attr_specialization" value="2" title="@{repeating_range_${x}_specialization}" type="radio"/>
+						<span data-i18n="expertise">expertise</span>
+						<input name="attr_specialization" value="3" title="@{repeating_range_${x}_specialization}" type="radio"/>
 						<label data-i18n-title="modifier" title="modifier">
 							<span data-i18n="modifier">modifier</span>
 							<input name="attr_dicepool_modifier" title="@{repeating_range_${x}_dicepool_modifier}" type="number"/>
@@ -1037,9 +1056,9 @@
                     </optgroup>
                   </select>
                   <h3 data-i18n="specialization">specialization</h3>
-                  <label data-i18n-title="specialization" title="specialization">
-                    <input name="attr_specialization" value="2" title="@{repeating_melee_${x}_specialization}" type="checkbox"/>
-                  </label>
+                    <input name="attr_specialization" value="2" title="@{repeating_melee_${x}_specialization}" type="radio"/>
+				  <h3 data-i18n="expertise">expertise</h3>
+				    <input name="attr_specialization" value="3" title="@{repeating_melee_${x}_specialization}" type="radio"/>
                   <h3 data-i18n="modifier">modifier</h3>
                   <label data-i18n-title="modifier" title="modifier">
                     <input name="attr_dicepool_modifier" title="@{repeating_melee_${x}_dicepool_modifier}" type="number"/>
@@ -1322,9 +1341,9 @@
                       <option data-i18n="spellcasting" value="@{spellcasting}" selected="selected">spellcasting</option>
                     </select>
                     <h3 data-i18n="specialization">Specialization</h3>
-                    <label data-i18n-title="specialization" title="Specialization">
-                      <input name="attr_specialization" title="@{repeating_spell_${x}_specialization}" type="checkbox" value="2"/>
-                    </label>
+                      <input name="attr_specialization" title="@{repeating_spell_${x}_specialization}" type="radio" value="2"/>
+					<h3 data-i18n="expertise">Expertise</h3>
+                      <input name="attr_specialization" title="@{repeating_spell_${x}_specialization}" type="radio" value="3"/>
                     <h3 data-i18n="modifierdice">modifier dice</h3>
                     <label data-i18n-title="modifierdice" title="modifier dice">
                       <input name="attr_dicepool_modifier" placeholder="0" title="@{repeating_spell_${x}_dicepool_modifier}" type="number" value="0"/>
@@ -1398,9 +1417,9 @@
                       <option data-i18n="alchemy" value="@{alchemy}" selected="selected">alchemy</option>
                     </select>
                     <h3 data-i18n="specialization">Specialization</h3>
-                    <label data-i18n-title="specialization" title="Specialization">
-                      <input name="attr_specialization" title="@{repeating_preps_${x}_specialization}" type="checkbox" value="2"/>
-                    </label>
+                      <input name="attr_specialization" title="@{repeating_preps_${x}_specialization}" type="radio" value="2"/>
+					<h3 data-i18n="expertise">Expertise</h3>
+					  <input name="attr_specialization" title="@{repeating_preps_${x}_specialization}" type="radio" value="3"/>
                     <h3 data-i18n="modifierdice">modifier dice</h3>
                     <label data-i18n-title="modifierdice" title="modifier dice">
                       <input name="attr_dicepool_modifier" placeholder="0" title="@{repeating_preps_${x}_dicepool_modifier}" type="number" value="0"/>
@@ -1471,9 +1490,9 @@
                       <option data-i18n="ritualspellcasting" value="@{ritualspellcasting}" selected="selected">Ritual Spellcasting</option>
                     </select>
                     <h3 data-i18n="specialization">specialization</h3>
-                    <label data-i18n-title="specialization" title="specialization">
-                      <input name="attr_specialization" title="@{@{repeating_undefined_${x}_specialization}" type="checkbox" value="2"/>
-                    </label>
+                      <input name="attr_specialization" title="@{repeating_undefined_${x}_specialization}" type="radio" value="2"/>
+					<h3 data-i18n="expertise">expertise</h3>
+                      <input name="attr_specialization" title="@{repeating_undefined_${x}_specialization}" type="radio" value="3"/>
                     <h3 data-i18n="modifier">modifier</h3>
                     <label data-i18n-title="modifier" title="modifier">
                       <input name="attr_dicepool_modifier" title="@{@{repeating_undefined_${x}_dicepool_modifier}" type="number"/>
@@ -1812,9 +1831,9 @@
                     <option data-i18n="software" value="@{software}" selected="selected">Software</option>
                   </select>
                   <h3 data-i18n="specialization"></h3>
-                  <label data-i18n-title="specialization" title="specialization">
-                    <input name="attr_specialization" value="2" title="@{repeating_forms_${x}_specialization}" type="checkbox"/>
-                  </label>
+                    <input name="attr_specialization" value="2" title="@{repeating_forms_${x}_specialization}" type="radio"/>
+				<h3 data-i18n="expertise"></h3>
+                    <input name="attr_specialization" value="3" title="@{repeating_forms_${x}_specialization}" type="radio"/>
                   <h3 data-i18n="modifier">modifier</h3>
                   <label data-i18n-title="modifier" title="modifier">
                     <input name="attr_dicepool_modifier" title="@{repeating_forms_${x}_dicepool_modifier}" type="number"/>
@@ -3371,97 +3390,25 @@
 <input type="hidden" name="attr_unarmedar_base" value="6" />
 <input type="hidden" name="attr_unarmedar_modifier" value="0" />
 
-<input type="hidden" name="attr_acting" min="0" value="0" />
-<input type="hidden" name="attr_aeronauticsmechanic" min="0" value="0" />
-<input type="hidden" name="attr_alchemy" min="0" value="0" />
-<input type="hidden" name="attr_animalhandling" min="0" value="0" />
-<input type="hidden" name="attr_arcana" min="0" value="0" />
-<input type="hidden" name="attr_archery" min="0" value="0" />
-<input type="hidden" name="attr_armorer" min="0" value="0" />
-<input type="hidden" name="attr_artificing" min="0" value="0" />
-<input type="hidden" name="attr_artisan" min="0" value="0" />
-<input type="hidden" name="attr_assensing" min="0" value="0" />
-<input type="hidden" name="attr_astralcombat" min="0" value="0" />
-<input type="hidden" name="attr_athletics" min="0" value="0" />
-<input type="hidden" name="attr_automatics" min="0" min="0" value="0" />
-<input type="hidden" name="attr_automotivemechanic" min="0" value="0" />
-<input type="hidden" name="attr_banishing" min="0" value="0" />
-<input type="hidden" name="attr_binding" min="0" value="0" />
-<input type="hidden" name="attr_biotech" min="0" value="0" />
-<input type="hidden" name="attr_biotechnology" min="0" value="0" />
-<input type="hidden" name="attr_blades" min="0" value="0" />
-<input type="hidden" name="attr_chemistry" min="0" value="0" />
-<input type="hidden" name="attr_closecombat" min="0" value="0" />
-<input type="hidden" name="attr_clubs" min="0" value="0" />
-<input type="hidden" name="attr_compiling" min="0" value="0" />
-<input type="hidden" name="attr_computer" min="0" value="0" />
-<input type="hidden" name="attr_con" min="0" value="0" />
-<input type="hidden" name="attr_conjuring" min="0" value="0" />
-<input type="hidden" name="attr_counterspelling" min="0" value="0" />
-<input type="hidden" name="attr_cracking" min="0" value="0" />
-<input type="hidden" name="attr_cybercombat" min="0" value="0" />
-<input type="hidden" name="attr_cybertechnology" min="0" value="0" />
-<input type="hidden" name="attr_decompiling" min="0" value="0" />
-<input type="hidden" name="attr_demolitions" min="0" value="0" />
-<input type="hidden" name="attr_disenchanting" min="0" value="0" />
-<input type="hidden" name="attr_disguise" min="0" value="0" />
-<input type="hidden" name="attr_diving" min="0" value="0" />
-<input type="hidden" name="attr_electronics" min="0" value="0" />
-<input type="hidden" name="attr_electronicwarfare" min="0" value="0" />
-<input type="hidden" name="attr_enchanting" min="0" value="0" />
-<input type="hidden" name="attr_engineering" min="0" value="0" />
-<input type="hidden" name="attr_escapeartist" min="0" value="0" />
-<input type="hidden" name="attr_etiquette" min="0" value="0" />
-<input type="hidden" name="attr_exoticmelee" min="0" value="0" />
-<input type="hidden" name="attr_exoticrange" min="0" value="0" />
-<input type="hidden" name="attr_firearms" min="0" value="0" />
-<input type="hidden" name="attr_firstaid" min="0" value="0" />
-<input type="hidden" name="attr_flight" min="0" value="0" />
-<input type="hidden" name="attr_forgery" min="0" value="0" />
-<input type="hidden" name="attr_freefall" min="0" value="0" />
-<input type="hidden" name="attr_gunnery" min="0" value="0" />
-<input type="hidden" name="attr_gymnastics" min="0" value="0" />
-<input type="hidden" name="attr_hacking" min="0" value="0" />
-<input type="hidden" name="attr_hardware" min="0" value="0" />
-<input type="hidden" name="attr_heavyweapons" min="0" value="0" />
-<input type="hidden" name="attr_impersonation" min="0" value="0" />
-<input type="hidden" name="attr_industrialmechanic" min="0" value="0" />
-<input type="hidden" name="attr_influence" min="0" value="0" />
-<input type="hidden" name="attr_instruction" min="0" value="0" />
-<input type="hidden" name="attr_intimidation" min="0" value="0" />
-<input type="hidden" name="attr_leadership" min="0" value="0" />
-<input type="hidden" name="attr_locksmith" min="0" value="0" />
-<input type="hidden" name="attr_longarms" min="0" value="0" />
-<input type="hidden" name="attr_medicine" min="0" value="0" />
-<input type="hidden" name="attr_nauticalmechanic" min="0" value="0" />
-<input type="hidden" name="attr_navigation" min="0" value="0" />
-<input type="hidden" name="attr_negotiation" min="0" value="0" />
-<input type="hidden" name="attr_outdoors" min="0" value="0" />
-<input type="hidden" name="attr_palming" min="0" value="0" />
-<input type="hidden" name="attr_perception" min="0" value="0" />
-<input type="hidden" name="attr_performance" min="0" value="0" />
-<input type="hidden" name="attr_pilotaerospace" min="0" value="0" />
-<input type="hidden" name="attr_pilotaircraft" min="0" value="0" />
-<input type="hidden" name="attr_pilotexoticvehicle" min="0" value="0" />
-<input type="hidden" name="attr_pilotgroundcraft" min="0" value="0" />
-<input type="hidden" name="attr_pilotwalker" min="0" value="0" />
-<input type="hidden" name="attr_pilotwatercraft" min="0" value="0" />
-<input type="hidden" name="attr_pistols" min="0" value="0" />
-<input type="hidden" name="attr_registering" min="0" value="0" />
-<input type="hidden" name="attr_ritualspellcasting" min="0" value="0" />
-<input type="hidden" name="attr_running" min="0" value="0" />
-<input type="hidden" name="attr_sneaking" min="0" value="0" />
-<input type="hidden" name="attr_software" min="0" value="0" />
-<input type="hidden" name="attr_sorcery" min="0" value="0" />
-<input type="hidden" name="attr_spellcasting" min="0" value="0" />
-<input type="hidden" name="attr_stealth" min="0" value="0" />
-<input type="hidden" name="attr_summoning" min="0" value="0" />
-<input type="hidden" name="attr_survival" min="0" value="0" />
-<input type="hidden" name="attr_swimming" min="0" value="0" />
-<input type="hidden" name="attr_tasking" min="0" value="0" />
-<input type="hidden" name="attr_throwingweapons" min="0" value="0" />
-<input type="hidden" name="attr_tracking" min="0" value="0" />
-<input type="hidden" name="attr_unarmedcombat" min="0" value="0" />
+<input type="hidden" name="attr_astral" min="-1" value="-1" />
+<input type="hidden" name="attr_athletics" min="-1" value="-1" />
+<input type="hidden" name="attr_biotech" min="-1" value="-1" />
+<input type="hidden" name="attr_closecombat" min="0" value="-1" />
+<input type="hidden" name="attr_con" min="-1" value="-1" />
+<input type="hidden" name="attr_conjuring" min="-1" value="-1" />
+<input type="hidden" name="attr_cracking" min="-1" value="-1" />
+<input type="hidden" name="attr_electronics" min="-1" value="-1" />
+<input type="hidden" name="attr_enchanting" min="-1" value="-1" />
+<input type="hidden" name="attr_engineering" min="-1" value="0" />
+<input type="hidden" name="attr_exoticweapons" min="-1" value="-1" />
+<input type="hidden" name="attr_firearms" min="-1" value="-1" />
+<input type="hidden" name="attr_influence" min="-1" value="-1" />
+<input type="hidden" name="attr_outdoors" min="-1" value="-1" />
+<input type="hidden" name="attr_perception" min="-1" value="-1" />
+<input type="hidden" name="attr_piloting" min="-1" value="-1" />
+<input type="hidden" name="attr_sorcery" min="-1" value="-1" />
+<input type="hidden" name="attr_stealth" min="-1" value="-1" />
+<input type="hidden" name="attr_tasking" min="-1" value="-1" />
 <script type="text/worker">
   
 const sheetAttributes = {
@@ -3505,8 +3452,8 @@ const sheetAttributes = {
   matrixAttributes: ['attack', 'sleaze', 'data_processing', 'firewall'],
 
   weaponTypes: ['range', 'melee'],
-  rangeAttributes: ['dicepool', 'weapon', 'damage', 'acc', 'ap', 'skill', 'ammo', 'mode', 'recoil'],
-  meleeAttributes: ['dicepool', 'weapon', 'damage', 'acc', 'ap', 'skill', 'reach'],
+  rangeAttributes: ['weapon', 'skill', 'damage', 'dicepool', 'close', 'near', 'far', 'extreme', 'ammo', 'mode', 'attribute'],
+  meleeAttributes: ['weapon', 'skill', 'damage', 'dicepool', 'close', 'reach'],
 
   spellTypes: ['spell', 'preps', 'ritual', 'forms'],
 
@@ -3520,18 +3467,20 @@ const sheetAttributes = {
     this[`primary_${type}_weapon_skill`] = type === 'range' ?  '@{firearms}' : '@{closecombat}',
     this[`primary_${type}_weapon_damage`] = '',
     this[`primary_${type}_weapon_dicepool`] = '',
-    this[`primary_${type}_weapon_acc`] = '',
-    this[`primary_${type}_weapon_ap`] = ''
+    this[`primary_${type}_weapon_close`] = ''
   }
 }
 
 class PrimaryRangeWeapon extends PrimaryWeapon {
   constructor(type) {
     super(type)
-    this[`primary_${type}_weapon_mode`] = '',
-    this[`primary_${type}_weapon_recoil`] = '',
+    this[`primary_${type}_weapon_near`] = '',
+    this[`primary_${type}_weapon_far`] = '',
+	this[`primary_${type}_weapon_extreme`] = '',
     this[`primary_${type}_weapon_ammo`] = '',
-    this[`primary_${type}_weapon_ammo_max`] = ''
+    this[`primary_${type}_weapon_ammo_max`] = '',
+	this[`primary_${type}_weapon_mode`] = '',
+	this[`primary_${type}_weapon_attribute`] = ''
   }
 }
 
@@ -3545,7 +3494,6 @@ class PrimaryMeleeWeapon extends PrimaryWeapon {
   
 class PrimaryArmor {
   constructor(name) {
-    this.armor_name = name || 'select in Arms',
     this.armor_rating = 0,
     this.chem_insulation = 0,
 	this.chem_seal = 0,
@@ -3656,7 +3604,6 @@ const shadowrunFunctions = {
 
   convertSkillSelectToHiddenSkill: skillName => {
     let skill = skillName.toLowerCase()
-    skill = skill.includes('group') ? skill.slice(0, -6) : skill
     skill = skill.includes(" ") ? skill.replace(/ /g,"") : skill
     return skill
   },
@@ -3717,9 +3664,7 @@ const shadowrunFunctions = {
 
     for (let [key, value] of Object.entries(attrs)) {
       const repRowID = processingFunctions.getReprowid(key)
-      if (key.includes('name')) {
-        update['armor_name'] = attrs[`${repRowID}_name`]
-      } else if (key.includes('rating')) {
+		if (key.includes('rating')) {
         update['primary_armor_rating'] = value
       } else if (key.includes('chem_insulation')) {
         update['active_chem_insulation'] = value
@@ -3947,24 +3892,6 @@ const updateAttributes = (array, attribute) => {
   })
 }
 
-const updateLimitTotal = attrs => {
-  attrs.essence ? Math.ceil(attrs.essence) || 0 : false;
-  return shadowrunFunctions.calculateLimitTotal(Object.values(attrs))
-}
-
-const updateLimits = attributeLimit => {
-  const array = sheetAttributes[attributeLimit].concat([`${attributeLimit}_modifier`, `${attributeLimit}_temp`, `${attributeLimit}_temp_flag`])
-  getAttrs(array, attrs => {
-      attrs = shadowrunFunctions.attributeFactory(attrs)
-      const bonus = attrs.bonus
-      delete attrs.bonus
-      const base = shadowrunFunctions.updateLimitTotal(attrs)
-      processingFunctions.setAttributes({
-        [attributeLimit]: processingFunctions.sumIntegers([base, bonus])
-      })
-  })
-}
-
 const updateDerivedAttribute = derivedAttribute => {
   getAttrs(sheetAttributes[derivedAttribute], attrs => {
     attrs = shadowrunFunctions.attributeFactory(attrs)
@@ -4084,10 +4011,11 @@ const updateDefaultAttribute = newValue => {
           return label ? `${label} ${disp}` : disp;
       }
   }
-
-  on("change:repeating_weapon", () => {
+// I'm not even sure the following lines ever get called or are necessary?
+  /*on("change:repeating_weapon", () => {
     const source = "repeating_weapon_weapon";
-      getAttrs([`${source}_range`, `${source}_type`, `${source}_reach`, `${source}_acc`, `${source}_dv`, `${source}_ap`, `${source}_mode`, `${source}_rc`, `${source}_ammo`, `${source}_note`, `${source}_primary`], (v) => {
+      getAttrs([`${source}_range`, `${source}_type`, `${source}_reach`, `${source}_close`, `${source}_near`, `${source}_far`,`${source}_extreme`, `${source}_dv`, `${source}_mode`, `${source}_rc`, `${source}_ammo`, `${source}_note`, `${source}_primary`], (v) => {
+		console.log(v);
           // Local builder putting the needed variables into scope for repeatingStringBuilder
           const b = repeatingStringBuilder(v, `${source}_`);
           // Determine fields to display and in their proper order and formatting
@@ -4100,7 +4028,7 @@ const updateDefaultAttribute = newValue => {
                   const ammo = b('amm');
                   return [
                       b('type'),
-                      b('acc', 'ACC'),
+                      b('near', 'NEAR'),
                       b('dv', 'DV'),
                       b('ap', 'AP', true),
                       b('mode'),
@@ -4136,7 +4064,7 @@ const updateDefaultAttribute = newValue => {
           // Finally wrap square brackets around the weapon display
           setAttrs(update);
       });
-  });
+  });*/
 
 
 //Spell displays set into an Array
@@ -4256,6 +4184,20 @@ sheetAttributes.repeatingSkills.forEach(field => {
     on(`change:repeating_${field}:attribute`, eventinfo => updateRepeatingSkillAttribute(eventinfo))
     on(`change:repeating_${field}:dicepool`, eventinfo => updateRepeatingSkillDicepool(eventinfo))
 })
+
+//if a skill is removed, its rank should be reset to untrained status. Otherwise, certain rolls might reference a wrong value.
+on("remove:repeating_active", function(eventInfo) {
+	var removedSkill = eventInfo.removedInfo;
+	for(const [key, val] of Object.entries(removedSkill)){
+		if(key.includes("_skill")){
+			console.log(val);
+			let skill = shadowrunFunctions.convertSkillSelectToHiddenSkill(val)
+			processingFunctions.setAttributes({
+				[`${skill}`]: -1
+			})
+		}
+	}
+});
 
 sheetAttributes.weaponTypes.forEach(type => {
 	on(`change:repeating_${type}:dicepool_modifier change:repeating_${type}:specialization`, eventinfo => updateRepeatingWeaponDicepool(eventinfo.triggerName))
