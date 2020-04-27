@@ -150,6 +150,8 @@ textarea {
 /* hidden areas that can be made visible */
 .sheet-pc div.sheet-skill-box input[name='attr_specialization'][value=' '] ~ div.sheet-buttons button[name*='specialization'],
 .sheet-pc div.sheet-skill-box input[name='attr_specialization'][value=''] ~ div.sheet-buttons button[name*='specialization'],
+.sheet-pc div.sheet-skill-box input[name='attr_expertise'][value=' '] ~ div.sheet-buttons button[name*='expertise'],
+.sheet-pc div.sheet-skill-box input[name='attr_expertise'][value=''] ~ div.sheet-buttons button[name*='expertise'],
 .sheet-pc div.sheet-magic input.sheet-magic-toggle[value='rituals'] ~ .sheet-headers h2:nth-of-type(1n+2),
 .sheet-matrix,
 .sheet-magic,
@@ -962,6 +964,10 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 }
 /* specialization settings position */
 .sheet-pc div.sheet-skill-box div.sheet-skills-active label[data-i18n-title='specialization'] {
+	grid-area: 2 / 1 / 2 / 6;
+}
+/* expertise settings position */
+.sheet-pc div.sheet-skill-box div.sheet-skills-active label[data-i18n-title='expertise'] {
 	grid-area: 3 / 1 / 3 / 6;
 }
 /* notes position in settings */
@@ -972,8 +978,13 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 /* aligns buttons for each repeating item in a grid/line */
 .sheet-pc div.sheet-skill-box div.sheet-skills-active div.sheet-buttons {
 	display: grid;
-	grid-template-columns: 1.5fr 1.5fr;
+	grid-template-columns: 1fr;
 	overflow: hidden;
+}
+/* indent for specialization and expertise */
+.sheet-pc div.sheet-skill-box div.sheet-skills-active div.sheet-buttons button[name="roll_specialization"],
+.sheet-pc div.sheet-skill-box div.sheet-skills-active div.sheet-buttons button[name="roll_expertise"] {
+	margin-left: 3.5em;
 }
 /* grid layout for rep items; same as headers btw */
 .sheet-pc div.sheet-skill-box div.sheet-skills-active div.repitem {
@@ -2104,11 +2115,6 @@ input.sheet-settings-toggle:checked ~ .sheet-cc-armor .sheet-cc-armor-mods div.s
     width: 100%; }
 
 /***** CONDITION MONITOR SETTINGS  *****/
-.sheet-condition-box .sheet-display,
-.sheet-condition-box .sheet-settings {
-  margin-top: -10px; }
-.sheet-condition-box .sheet-settings {
-  /***** CONDITION MONITOR DISPLAY*****/ }
   .sheet-condition-box .sheet-settings input {
     border-bottom: 1px solid #000;
     border-radius: 0px;
@@ -2458,7 +2464,8 @@ input.sheet-settings-toggle:checked ~ .sheet-cc-armor .sheet-cc-armor-mods div.s
 .sheet-edg-hex,
 .sheet-con-hex {
   position: relative;
-  top: -70px;
+  top: -50px;
+  left: 5px;
   transition: transform .2s; }
 
 .sheet-edg-hex input[type='checkbox'],
