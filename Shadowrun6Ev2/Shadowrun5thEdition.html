@@ -712,17 +712,9 @@
 				</div>
 				<div class="row-long cc-row">
 					<h2 data-i18n="primaryrangedweapon">Primary Ranged Weapon</h2>
-					<button type="roll" name="primary range" value="@{gm_toggle} &{template:rolls}{{header=@{primary_range_weapon}}}{{base=^{base}}}{{dice=[[((@{primary_range_weapon_skill}+@{primary_range_weapon_dicepool}+@{agility})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{primary_range_weapon_mode}, DV @{primary_range_weapon_damage}, Atk @{primary_range_weapon_close}/@{primary_range_weapon_near}/@{primary_range_weapon_far}/@{primary_range_weapon_extreme}}}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}" title="Primary ranged weapon">
+					<button type="roll" name="primary range" value="@{gm_toggle} &{template:rolls}{{header=@{primary_range_weapon}}}{{base=^{base}}}{{dice=[[((@{primary_range_weapon_skill}+@{primary_range_weapon_dicepool}+@{primary_range_weapon_attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=AR @{primary_range_weapon_close}/@{primary_range_weapon_near}/@{primary_range_weapon_far}/@{primary_range_weapon_extreme}, DV @{primary_range_weapon_damage}, Mode @{primary_range_weapon_mode}}}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}" title="Primary ranged weapon">
 						<span name="attr_primary_range_weapon" title="@{primary_ranged_weapon}"></span>
 					</button>
-					<!-- Ammo removal button -->
-					<!-- Dunno how we want to handle this in the future -->
-					<button name="act_shots_remove" type="action">4</button>
-					<button type="action" name="act_primary_ammo" title="Shots Fired">
-						<img alt="small handgun icon" src="https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Shadowrun5thEdition/images/gun.png" />
-						<span name="attr_shots_fired"></span>
-					</button>
-					<button name="act_shots_add" type="action">4</button>
 				</div>
 				<div class="cc-row">
 					<h3 data-i18n="dv">DV</h3>
@@ -740,7 +732,7 @@
 					<h3 data-i18n="mode">Mode</h3>
 					<span name="attr_primary_range_weapon_mode" title="@{primary_range_weapon_mode}"></span>
 					<h3 data-i18n="ammo">Ammo</h3>
-					<span name="attr_primary_range_weapon_ammo" title="@{primary_range_weapon_ammo}"></span>
+					<input type="number" name="attr_primary_range_weapon_ammo" title="@{primary_range_weapon_ammo}"/>
 					<span name="attr_primary_range_weapon_ammo_max" title="@{primary_range_weapon_ammo_max}"></span>
 					<button class="pictos" name="act_reload" type="action">0</button>
 				</div>
@@ -921,13 +913,13 @@
               <h2 data-i18n="close">Close</h2>
               <h2 data-i18n="near">Near</h2>
               <h2 data-i18n="far">Far</h2>
-              <h2 data-i18n="extreme">Extreme</h2>
+              <h2 data-i18n="extr">Extr</h2>
 			  <h2 data-i18n="ammo">Ammo</h2>
             </div>
             <fieldset class="repeating_range">
 				<input name="attr_dicepool" type="hidden" value="0"/>
 				<input class="flag-primary" name="attr_primary" type="hidden" value=""/>
-				<button name="roll_range_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^{attribute}}}{{dice=[[((@{skill}+@{dicepool}+@{attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{mode}, ATK @{close}/@{near}/@{far}/@{extreme}, DV @{damage}}}">
+				<button name="roll_range_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^{base}}}{{dice=[[((@{skill}+@{dicepool}+@{attribute})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{mode}, AR @{close}/@{near}/@{far}/@{extreme}, DV @{damage}}}">
 					<span name="attr_weapon"></span>
 				</button>
 				<span class="text-center" title="@{repeating_range_${x}_damage}" name="attr_damage"></span>
@@ -951,57 +943,60 @@
 					<span name="attr_notes"></span>
 				</div>
 				<div class="settings">
-					<input name="attr_weapon" placeholder="Ares Predator VI" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
-					<input name="attr_damage" placeholder="3P" title="@{repeating_range_${x}_damage}" type="text" value=""/>
-					<select name="attr_mode" title="@{mode}" value="SS">
-						<option data-i18n="bf" value="BF">BF</option>
-						<option data-i18n="fa" value="FA">FA</option>
-						<option data-i18n="sa" value="SA">SA</option>
-						<option data-i18n="ss" value="SS" selected>SS</option>
-						<option data-i18n="other" value="Other">Other</option>
-					</select>
-					<input name="attr_close" placeholder="10" title="@{repeating_range_${x}_close}" type="text" value=""/>
-					<input name="attr_near" placeholder="10" title="@{repeating_range_${x}_near}" type="number" value=""/>
-					<input name="attr_far" placeholder="6" title="@{repeating_range_${x}_far}" type="number" value=""/>
-					<input name="attr_extreme" placeholder="-" title="@{repeating_range_${x}_extreme}" type="number" value=""/>
-					<input name="attr_ammo" placeholder="15(s)" title="@{repeating_range_${x}_ammo}" type="number" value=""/>
-						<!-- TODO: let user select modes and reflect selection in attr_mode select? -->
-						<label data-i18n-title="modeoptions" title="Mode Options">
+					<input name="attr_weapon" placeholder="Weapon Name" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
+					<label data-i18n-title="primary" title="Primary">
+						<span data-i18n="primary">primary</span>
+						<input name="attr_primary" type="checkbox" title="@{repeating_range_${x}_primary}" value="primary"/>
+					</label>
+					<label data-i18n-title="damage" title="Damage Value">
+						<span data-i18n="dv">DV</span>
+						<input name="attr_damage" placeholder="3P" title="@{repeating_range_${x}_damage}" type="text" value=""/>
+					</label>
+					<label data-i18n-title="ammo" title="Ammo">
+						<span data-i18n="ammo">Ammo</span>
+						<input name="attr_ammo" placeholder="Magazine Size" title="@{repeating_range_${x}_ammo}" type="text" value=""/>
+					</label>
+					<label data-i18n-title="attackrating" title="Attack Rating"><span data-i18n="attackrating">Attack Rating</span></label>
+					<input name="attr_close" placeholder="Close" title="@{repeating_range_${x}_close}" type="text" value=""/>
+					<input name="attr_near" placeholder="Near" title="@{repeating_range_${x}_near}" type="text" value=""/>
+					<input name="attr_far" placeholder="Far" title="@{repeating_range_${x}_far}" type="text" value=""/>
+					<input name="attr_extreme" placeholder="Extreme" title="@{repeating_range_${x}_extreme}" type="text" value=""/>
+					<!-- TODO: let user select modes and reflect selection in attr_mode select? -->
+					<!--	<label data-i18n-title="modeoptions" title="Mode Options">
 							<span data-i18n="modeoptions">Mode Options</span>
 							<input name="attr_mode_options" placeholder="SA/BF/FA" type="text" title="@{repeating_range_${x}_mode_options}}"/>
-						</label>
-						<label data-i18n-title="primary" title="Primary">
-							<span data-i18n="primary">primary</span>
-							<input name="attr_primary" type="checkbox" title="@{repeating_range_${x}_primary}" value="primary"/>
-						</label>
-						<label data-i18n-title="skill" title="Skill">
-							<span data-i18n="skill">skill</span>
-							<select name="attr_skill" title="@{repeating_range_${x}_skill}" value="@{firearms}">
-								<option value="@{athletics}" data-i18n="athletics">athletics</option>
-								<option value="@{engineering}" data-i18n="engineering">engineering</option>
-								<option value="0" data-i18n="exoticweapons">exotic weapons</option>
-								<option value="@{firearms}" data-i18n="firearms" selected>firearms</option>
-							</select>
-						</label>
-						<label data-i18n-title="attribute" title="Attribute">
-							<span data-i18n="attribute">Attribute</span>
-							<select name="attr_attribute" title="@{repeating_range_${x}_attribute}" value="@{agility}">
-								<option data-i18n="agility" value="@{agility}" selected>Agility</option>
-								<option data-i18n="logic" value="@{logic}">Logic</option>
-							</select>
-						</label>
-						<span data-i18n="specialization">specialization</span>
+						</label>-->
+						
+					<label data-i18n-title="skill" title="Skill">
+						<span data-i18n="skill">Skill</span>
+						<select name="attr_skill" title="@{repeating_range_${x}_skill}" value="@{firearms}">
+							<option value="@{athletics}" data-i18n="athletics">athletics</option>
+							<option value="@{engineering}" data-i18n="engineering">engineering</option>
+							<option value="@{exoticweapons}" data-i18n="exoticweapons">exotic weapons</option>
+							<option value="@{firearms}" data-i18n="firearms" selected>firearms</option>
+						</select>
+					</label>
+					<label data-i18n-title="modifier" title="modifier">
+						<span data-i18n="mod">mod</span>
+						<input name="attr_dicepool_modifier" title="@{repeating_range_${x}_dicepool_modifier}" type="number" value="0"/>
+					</label>
+					<label data-i18n-title="attribute" title="Attribute">
+						<span data-i18n="attribute">Attribute</span>
+						<select name="attr_attribute" title="@{repeating_range_${x}_attribute}" value="@{agility}">
+							<option data-i18n="agility" value="@{agility}" selected>Agility</option>
+							<option data-i18n="logic" value="@{logic}">Logic</option>
+						</select>
+					</label>
+					<label data-i18n-title="specialization" title="Specialization">
+						<span data-i18n="specialization">Specialization</span>
+						<input name="attr_specialization" value="0" title="@{repeating_range_${x}_specialization}" type="radio" checked/>
+						<span data-i18n="none">none</span>
 						<input name="attr_specialization" value="2" title="@{repeating_range_${x}_specialization}" type="radio"/>
-						<span data-i18n="expertise">expertise</span>
+						<span data-i18n="specialization">specialization</span>
 						<input name="attr_specialization" value="3" title="@{repeating_range_${x}_specialization}" type="radio"/>
-						<label data-i18n-title="modifier" title="modifier">
-							<span data-i18n="modifier">modifier</span>
-							<input name="attr_dicepool_modifier" title="@{repeating_range_${x}_dicepool_modifier}" type="number"/>
-						</label>
-						<input name="attr_skill" type="hidden" value=""/>
-						<div class="exotic-warning">
-							<i data-i18n="exoticnote">Exotic weapons are not linked to a skill. Use Modifier input to set dicepool.</i>
-						</div>
+						<span data-i18n="expertise">expertise</span>
+					</label>
+					<input name="attr_skill" type="hidden" value=""/>
 					<h3 data-i18n="notes">notes</h3>
 					<label data-i18n-title="notes" title="notes">
 						<textarea name="attr_notes" placeholder="Notes" title="@{repeating_range_${x}_notes}" type="text" value=""></textarea>
@@ -3357,19 +3352,19 @@
 <input type="hidden" name="attr_primary_range_weapon_skill" />
 <input type="hidden" name="attr_primary_range_weapon_damage" />
 <input type="hidden" name="attr_primary_range_weapon_dicepool" />
-<input type="hidden" name="attr_primary_range_weapon_acc" />
-<input type="hidden" name="attr_primary_range_weapon_ap" />
 <input type="hidden" name="attr_primary_range_weapon_mode" />
 <input type="hidden" name="attr_primary_range_weapon_recoil" />
 <input type="hidden" name="attr_primary_range_weapon_ammo" />
-<input type="hidden" name="attr_shots_fired" value="1" />
+<input type="hidden" name="attr_primary_range_weapon_close" />
+<input type="hidden" name="attr_primary_range_weapon_near" />
+<input type="hidden" name="attr_primary_range_weapon_far" />
+<input type="hidden" name="attr_primary_range_weapon_extreme" />
+<input type="hidden" name="attr_primary_range_weapon_attribute" />
 
 <input type="hidden" name="attr_primary_melee_weapon" value="select a Primary in Arms" />
 <input type="hidden" name="attr_primary_melee_weapon_skill" />
 <input type="hidden" name="attr_primary_melee_weapon_damage" />
 <input type="hidden" name="attr_primary_melee_weapon_dicepool" />
-<input type="hidden" name="attr_primary_melee_weapon_acc" />
-<input type="hidden" name="attr_primary_melee_weapon_ap" />
 <input type="hidden" name="attr_primary_melee_weapon_reach" />
 
 <input type="hidden" name="attr_initiative_mod" value="6" />
