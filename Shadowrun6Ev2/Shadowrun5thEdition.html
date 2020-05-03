@@ -738,17 +738,17 @@
 				</div>
 				<div class="row-long cc-row">
 					<h2 data-i18n="primarymeleeweapon">Primary Melee Weapon</h2>
-					<button type="roll" name="primary melee" value="@{gm_toggle} &{template:rolls}{{header=@{primary_melee_weapon}}}{{base=^{base}}}{{dice=[[((@{primary_melee_weapon_skill}+@{primary_melee_weapon_dicepool}+@{agility})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=Atk @{primary_melee_weapon_close}, DV @{primary_melee_weapon_damage}, Reach @{primary_melee_weapon_reach}}}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}" title="Primary melee weapon">
+					<button type="roll" name="primary melee" value="@{gm_toggle} &{template:rolls}{{header=@{primary_melee_weapon}}}{{base=^{base}}}{{dice=[[((@{closecombat}+@{primary_melee_weapon_dicepool}+@{agility})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=Close @{primary_melee_weapon_close}, DV @{primary_melee_weapon_damage}, Reach @{primary_melee_weapon_reach}}}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}">
 						<span name="attr_primary_melee_weapon" title="@{primary_melee_weapon}"></span>
 					</button>
 				</div>
 				<div class="cc-row">
-					<h3 data-i18n="reach">Reach</h3>
-					<span name="attr_primary_melee_weapon_reach" title="@{primary_melee_weapon_reach}"></span>
 					<h3 data-i18n="dv">DV</h3>
 					<span name="attr_primary_melee_weapon_damage" title="@{primary_melee_weapon_damage}"></span>
 					<h3 data-i18n="close">Close</h3>
 					<span name="attr_primary_melee_weapon_close" title="@{primary_melee_weapon_close}"></span>
+					<h3 data-i18n="reach">Reach</h3>
+					<span name="attr_primary_melee_weapon_reach" title="@{primary_melee_weapon_reach}"></span>
 				</div>
 			</div>
 		</div>
@@ -943,30 +943,13 @@
 					<span name="attr_notes"></span>
 				</div>
 				<div class="settings">
-					<input name="attr_weapon" placeholder="Weapon Name" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
-					<label data-i18n-title="primary" title="Primary">
-						<span data-i18n="primary">primary</span>
-						<input name="attr_primary" type="checkbox" title="@{repeating_range_${x}_primary}" value="primary"/>
-					</label>
-					<label data-i18n-title="damage" title="Damage Value">
-						<span data-i18n="dv">DV</span>
-						<input name="attr_damage" placeholder="3P" title="@{repeating_range_${x}_damage}" type="text" value=""/>
-					</label>
-					<label data-i18n-title="ammo" title="Ammo">
-						<span data-i18n="ammo">Ammo</span>
-						<input name="attr_ammo" placeholder="Magazine Size" title="@{repeating_range_${x}_ammo}" type="text" value=""/>
-					</label>
-					<label data-i18n-title="attackrating" title="Attack Rating"><span data-i18n="attackrating">Attack Rating</span></label>
-					<input name="attr_close" placeholder="Close" title="@{repeating_range_${x}_close}" type="text" value=""/>
-					<input name="attr_near" placeholder="Near" title="@{repeating_range_${x}_near}" type="text" value=""/>
-					<input name="attr_far" placeholder="Far" title="@{repeating_range_${x}_far}" type="text" value=""/>
-					<input name="attr_extreme" placeholder="Extreme" title="@{repeating_range_${x}_extreme}" type="text" value=""/>
-					<!-- TODO: let user select modes and reflect selection in attr_mode select? -->
-					<!--	<label data-i18n-title="modeoptions" title="Mode Options">
-							<span data-i18n="modeoptions">Mode Options</span>
-							<input name="attr_mode_options" placeholder="SA/BF/FA" type="text" title="@{repeating_range_${x}_mode_options}}"/>
-						</label>-->
-						
+					<input name="attr_weapon" data-i18n-placeholder="weapon" title="@{repeating_range_${x}_weapon}" type="text" value=""/>
+					<input name="attr_damage" data-i18n-placeholder="damage" title="@{repeating_range_${x}_damage}" type="text" value=""/>
+					<input name="attr_close" title="@{repeating_range_${x}_close}" type="text" value=""/>
+					<input name="attr_near" title="@{repeating_range_${x}_near}" type="text" value=""/>
+					<input name="attr_far" title="@{repeating_range_${x}_far}" type="text" value=""/>
+					<input name="attr_extreme" title="@{repeating_range_${x}_extreme}" type="text" value=""/>
+					<input name="attr_ammo" placeholder="#" title="@{repeating_range_${x}_ammo}" type="number" value=""/>
 					<label data-i18n-title="skill" title="Skill">
 						<span data-i18n="skill">Skill</span>
 						<select name="attr_skill" title="@{repeating_range_${x}_skill}" value="@{firearms}">
@@ -976,16 +959,16 @@
 							<option value="@{firearms}" data-i18n="firearms" selected>firearms</option>
 						</select>
 					</label>
-					<label data-i18n-title="modifier" title="modifier">
-						<span data-i18n="mod">mod</span>
-						<input name="attr_dicepool_modifier" title="@{repeating_range_${x}_dicepool_modifier}" type="number" value="0"/>
-					</label>
 					<label data-i18n-title="attribute" title="Attribute">
 						<span data-i18n="attribute">Attribute</span>
 						<select name="attr_attribute" title="@{repeating_range_${x}_attribute}" value="@{agility}">
 							<option data-i18n="agility" value="@{agility}" selected>Agility</option>
 							<option data-i18n="logic" value="@{logic}">Logic</option>
 						</select>
+					</label>
+					<label data-i18n-title="modifier" title="modifier">
+						<span data-i18n="mod">mod</span>
+						<input name="attr_dicepool_modifier" title="@{repeating_range_${x}_dicepool_modifier}" type="number" value="0"/>
 					</label>
 					<label data-i18n-title="specialization" title="Specialization">
 						<span data-i18n="specialization">Specialization</span>
@@ -995,6 +978,10 @@
 						<span data-i18n="specialization">specialization</span>
 						<input name="attr_specialization" value="3" title="@{repeating_range_${x}_specialization}" type="radio"/>
 						<span data-i18n="expertise">expertise</span>
+					</label>
+					<label data-i18n-title="primary" title="Primary">
+						<span data-i18n="primary">primary</span>
+						<input name="attr_primary" type="checkbox" title="@{repeating_range_${x}_primary}" value="primary"/>
 					</label>
 					<input name="attr_skill" type="hidden" value=""/>
 					<h3 data-i18n="notes">notes</h3>
@@ -1007,68 +994,50 @@
           <div class="rows repeating-container weapon-melee">
             <div class="row-long headers">
               <h2 data-i18n="weapon">Weapon</h2>
-              <h2 data-i18n="dam">Dam</h2>
-              <h2 data-i18n="acc">ACC</h2>
-              <h2 data-i18n="ap">AP</h2>
+              <h2 data-i18n-title="damagevalues" data-i18n="dv">DV</h2>
+              <h2 data-i18n="close">Close</h2>
               <h2 data-i18n="reach">Reach</h2>
             </div>
+			<!-- TODO: add unarmed strikes as a default? -->
             <fieldset class="repeating_melee">
-              <input name="attr_dicepool" type="hidden" value="0"/>
-              <input class="flag-primary" name="attr_primary" type="hidden" value=""/>
-              <button name="roll_melee_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^{agility}}}{{dice=[[((@{skill}+@{dicepool}+@{agility})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=ACC @{acc}, DV @{damage}, AP @{ap}, Reach @{reach}}}"><span name="attr_weapon"></span></button><span class="text-center" name="attr_damage"></span><span class="text-center" name="attr_acc"></span><span class="text-center" name="attr_ap"></span><span class="text-center" name="attr_reach"></span>
-              <input class="collapse-flag" name="attr_display_flag" type="checkbox"/><span class="pictos">i</span>
-              <input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/><span class="pictos">x</span>
-              <div class="collapse"><span name="attr_notes"></span></div>
-              <div class="settings">
-                <label data-i18n-title="weapon" title="weapon">
-                  <input name="attr_weapon" placeholder="Katana" title="@{repeating_melee_${x}_weapon}" type="text" value=""/>
-                </label>
-                <label data-i18n-title="dam" title="dam">
-                  <input name="attr_damage" placeholder="5P" title="@{repeating_melee_${x}_damage}" type="text" value=""/>
-                </label>
-                <label data-i18n-title="acc" title="acc">
-                  <input name="attr_acc" placeholder="7" title="@{repeating_melee_${x}_acc}" type="text" value=""/>
-                </label>
-                <label data-i18n-title="ap" title="ap">
-                  <input name="attr_ap" placeholder="-3" title="@{repeating_melee_${x}_ap}" type="number" value=""/>
-                </label>
-                <label data-i18n-title="reach" title="reach">
-                  <input name="attr_reach" placeholder="1" title="@{repeating_melee_${x}_reach}" type="number" value=""/>
-                </label>
-                <h3 data-i18n="primary">primary</h3>
-                <label data-i18n-title="primary" title="Primary">
-                  <input name="attr_primary" type="checkbox" title="@{repeating_melee_${x}_primary}" value="primary"/>
-                </label>
-                <div class="row">
-                  <h3 data-i18n="skill">skill</h3>
-                  <select name="attr_skill" title="@{repeating_melee_${x}_skill}" value="@{closecombat}">
-                    <optgroup label="Combat Skills">Combat Skills
-                      <option data-i18n="closecombatgroup" value="@{closecombat}" selected="selected">Close Combat Group</option>
-                      <option data-i18n="blades" value="@{blades}">Blades</option>
-                      <option data-i18n="clubs" value="@{clubs}">Clubs</option>
-                      <option data-i18n="exoticmelee" value="0">Blades</option>
-                      <option data-i18n="unarmedcombat" value="@{unarmedcombat}">Unarmed Combat</option>
-                    </optgroup>
-                    <optgroup label="Vehicle Skills">Vehicle Skills
-                      <option data-i18n="gunnery" value="@{gunnery}">Gunnery</option>
-                    </optgroup>
-                  </select>
-                  <h3 data-i18n="specialization">specialization</h3>
-                    <input name="attr_specialization" value="2" title="@{repeating_melee_${x}_specialization}" type="radio"/>
-				  <h3 data-i18n="expertise">expertise</h3>
-				    <input name="attr_specialization" value="3" title="@{repeating_melee_${x}_specialization}" type="radio"/>
-                  <h3 data-i18n="modifier">modifier</h3>
-                  <label data-i18n-title="modifier" title="modifier">
-                    <input name="attr_dicepool_modifier" title="@{repeating_melee_${x}_dicepool_modifier}" type="number"/>
-                  </label>
-                  <input name="attr_skill" type="hidden" value=""/>
-                  <div class="exotic-warning"><i data-i18n="exoticnote">Exotic weapons are not linked to a skill. Use Modifier input to set dicepool.</i></div>
-                </div>
-                <h3 data-i18n="notes">notes</h3>
-                <label data-i18n-title="notes" title="notes">
-                  <textarea name="attr_notes" placeholder="Notes" title="@{repeating_melee_${x}_notes}" type="text" value=""></textarea>
-                </label>
-              </div>
+				<input name="attr_dicepool" type="hidden" value="0"/>
+				<input class="flag-primary" name="attr_primary" type="hidden" value=""/>
+				<button name="roll_melee_weapon" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{weapon}}}{{base=^{agility}}}{{dice=[[((@{closecombat}+@{dicepool}+@{agility})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=AR @{close}, DV @{damage}, Reach @{reach}}}">
+					<span name="attr_weapon"></span>
+				</button>
+				<span class="text-center" name="attr_damage"></span>
+				<span class="text-center" name="attr_close"></span>
+				<span class="text-center" name="attr_reach"></span>
+				<input class="collapse-flag" name="attr_display_flag" type="checkbox"/><span class="pictos">i</span>
+				<input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/><span class="pictos">x</span>
+				<div class="collapse"><span name="attr_notes"></span></div>
+				<div class="settings">
+					<input name="attr_weapon" data-i18n-placeholder="weapon" title="@{repeating_melee_${x}_weapon}" type="text" value=""/>
+					<input name="attr_damage" data-i18n-placeholder="damage" title="@{repeating_melee_${x}_damage}" type="text" value=""/>
+					<input name="attr_close" data-i18n-placeholder="close" title="@{repeating_melee_${x}_close}" type="text" value=""/>
+					<input name="attr_reach" # title="@{repeating_melee_${x}_reach}" type="number" value=""/>
+					<label data-i18n-title="primary" title="Primary">
+						<span data-i18n="primary">primary</span>
+						<input name="attr_primary" type="checkbox" title="@{repeating_melee_${x}_primary}" value="primary"/>
+					</label>
+					<label data-i18n-title="modifier" title="modifier">
+						<span data-i18n="mod">mod</span>
+						<input name="attr_dicepool_modifier" title="@{repeating_melee_${x}_dicepool_modifier}" type="number" value="0"/>
+					</label>
+					<label data-i18n-title="specialization" title="Specialization">
+						<span data-i18n="specialization">Specialization</span>
+						<input name="attr_specialization" value="0" title="@{repeating_melee_${x}_specialization}" type="radio" checked/>
+						<span data-i18n="none">none</span>
+						<input name="attr_specialization" value="2" title="@{repeating_melee_${x}_specialization}" type="radio"/>
+						<span data-i18n="specialization">specialization</span>
+						<input name="attr_specialization" value="3" title="@{repeating_melee_${x}_specialization}" type="radio"/>
+						<span data-i18n="expertise">expertise</span>
+					</label>
+					<h3 data-i18n="notes">notes</h3>
+					<label data-i18n-title="notes" title="notes">
+						<textarea name="attr_notes" placeholder="Notes" title="@{repeating_melee_${x}_notes}" type="text" value=""></textarea>
+					</label>
+				</div>
             </fieldset>
           </div>
         </div>
@@ -1085,12 +1054,12 @@
           <div class="rows repeating-container">
             <div class="row-long headers">
               <h2 data-i18n="armor">Armor</h2>
-              <h2 data-i18n="rating">Rating</h2>
-              <h2 data-i18n="cheminsul">Chem. Insul.</h2>
-			  <h2 data-i18n="chemseal">Chem. Seal</h2>
-              <h2 data-i18n="cold">Cold</h2>
-              <h2 data-i18n="elec">Elec</h2>
-              <h2 data-i18n="fire">Fire</h2>
+              <h2 data-i18n-title="armorrating" class="pictosC">e</h2>
+              <h2 data-i18n-title="chemicalinsulation" class="pictos3">d</h2>
+			  <h2 data-i18n-title="chemicalseal" class="pictos3">l</h2>
+              <h2 data-i18n-title="coldresistance" class="pictos">b</h2>
+              <h2 data-i18n-title="electricalinsulation" class="pictos">e</h2>
+              <h2 data-i18n-title="fireresistance" class="pictos3">j</h2>
             </div>
             <fieldset class="repeating_armor">
               <input class="flag-primary" name="attr_primary" type="hidden" value=""/>
@@ -1105,13 +1074,13 @@
               <input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/><span class="pictos">x</span>
               <div class="collapse"><span name="attr_notes"></span></div>
               <div class="settings">
-                <input name="attr_name" placeholder="Armor Jacket" title="@{@{repeating_armor_${x}_name}" type="text" value="0"/>
+                <input name="attr_name" placeholder="Armor Name" title="@{@{repeating_armor_${x}_name}" type="text" value=""/>
                 <input name="attr_rating" placeholder="4" title="@{@{repeating_armor_${x}_rating}" type="number" value="0"/>
-                <input name="attr_chem_insulation" placeholder="0" title="@{@{repeating_armor_${x}_chem_insulation}" type="number" value="0"/>
-				<input name="attr_chem_seal" placeholder="0" title="@{@{repeating_armor_${x}_chem_seal}" type="number" value=""/>
-                <input name="attr_cold_resistance" placeholder="0" title="@{@{repeating_armor_${x}_cold_resistance}" type="number" value="0"/>
-                <input name="attr_elec_insulation" placeholder="0" title="@{@{repeating_armor_${x}_elec_insulation}" type="number" value="0"/>
-                <input name="attr_fire_resistance" placeholder="0" title="@{@{repeating_armor_${x}_fire_resistance}" type="number" value="0"/>
+                <input name="attr_chem_insulation" placeholder="#" title="@{@{repeating_armor_${x}_chem_insulation}" type="number" value="0"/>
+				<input name="attr_chem_seal" placeholder="#" title="@{@{repeating_armor_${x}_chem_seal}" type="number" value="0"/>
+                <input name="attr_cold_resistance" placeholder="#" title="@{@{repeating_armor_${x}_cold_resistance}" type="number" value="0"/>
+                <input name="attr_elec_insulation" placeholder="#" title="@{@{repeating_armor_${x}_elec_insulation}" type="number" value="0"/>
+                <input name="attr_fire_resistance" placeholder="#" title="@{@{repeating_armor_${x}_fire_resistance}" type="number" value="0"/>
                 <div class="row">
                   <h3 data-i18n="primary">primary</h3>
                   <input name="attr_primary" type="checkbox" title="@{@{repeating_armor_${x}_primary}" value="primary"/>
@@ -3362,7 +3331,6 @@
 <input type="hidden" name="attr_primary_range_weapon_attribute" />
 
 <input type="hidden" name="attr_primary_melee_weapon" value="select a Primary in Arms" />
-<input type="hidden" name="attr_primary_melee_weapon_skill" />
 <input type="hidden" name="attr_primary_melee_weapon_damage" />
 <input type="hidden" name="attr_primary_melee_weapon_dicepool" />
 <input type="hidden" name="attr_primary_melee_weapon_reach" />

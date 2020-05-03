@@ -213,10 +213,8 @@ input[name='attr_specialization'][value=' '] ~ div.sheet-row-long div.sheet-butt
 input[name='attr_weapon_range'][value='range'] ~ div.sheet-settings h2[data-i18n='reach'],
 input[name='attr_weapon_range'][value='range'] ~ div.sheet-settings label[data-i18n-title='reach'],
 input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings h2[data-i18n='modes'],
-input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings h2[data-i18n='recoil'],
 input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings h2[data-i18n='ammo'],
 input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings label[data-i18n-title='modes'],
-input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings label[data-i18n-title='recoil'],
 input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings label[data-i18n-title='ammo'],
 input[name='attr_weapon_range'][value='melee'] ~ div.sheet-settings span,
 input[name='attr_category']:not([value='Combat']) ~ h2[data-i18n='combat'],
@@ -816,21 +814,21 @@ div.sheet-matrix-device .sheet-matrixFirewall {
       padding-right: 0px;
 }
 /* inputs within labels in repeating sections are left aligned */
-    .sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_name'],
-    .sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_weapon'],
-    .sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_quality'] {
-        text-align: left;
+.sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_name'],
+.sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_weapon'],
+.sheet-pc div.sheet-repeating-container div.repitem label input[name='attr_quality'] {
+	text-align: left;
 }
 
-      .sheet-pc div.sheet-repeating-container div.repitem label[data-i18n-title='modifier'] {
-        width: 3em;
+.sheet-pc div.sheet-repeating-container div.repitem label[data-i18n-title='modifier'] {
+	width: 3em;
 }
 /* setting areas within repeating sections */
-    .sheet-pc div.sheet-repeating-container div.repitem div.sheet-settings {
-      background-color: #cccccc;
-      border-left: 2px solid #555;
-      padding: 2% 1%;
-      width: 100%;
+.sheet-pc div.sheet-repeating-container div.repitem div.sheet-settings{
+	background-color: #cccccc;
+	border-left: 2px solid #555;
+	padding: 2% 1%;
+	width: 100%;
 }
 /* selects in repeating setting areas are capitalized */
       .sheet-pc div.sheet-repeating-container div.repitem div.sheet-settings select {
@@ -869,12 +867,6 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 .sheet-pc div.sheet-static div.sheet-attr-box button:focus,
 .sheet-pc div.sheet-static div.sheet-attr-box button:active {
 	transform: scale(1.1);
-}
-
-/* inverting gun symbol on ammo usage button */
-/* gotta think of a neater way of dealing with ammo anyway... */
-.sheet-pc div.sheet-core button[name="act_primary_ammo"]:hover > img {
-	filter: brightness(0) invert(1);
 }
 
 /* QUALITY type is centered */
@@ -1099,6 +1091,12 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 	background-color: #FCD116;
 	border-bottom: 2px solid #040404;
 }
+/* overflow handling for weapon values */
+.sheet-pc div.sheet-arms div.repitem > span.sheet-text-center {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 /* white-space handling for notes */
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem label[data-i18n-title='notes'] span[name='attr_notes'],
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem h3[data-i18n='notes'] span[name='attr_notes'],
@@ -1110,6 +1108,7 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 	display: inline-block;
 	font-size: 0.8em;
 	text-transform: capitalize;
+	width: 100%;
 }
 /* number input width */
 .sheet-pc div.sheet-arms div.sheet-weapons input[type='number'] {
@@ -1121,25 +1120,29 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 .sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee {
     width: 100%;
 }
-/* header grid */
+/* header row grid */
 .sheet-pc div.sheet-arms div.sheet-headers {
 	display: grid;
+	padding-left: 0.5%;
+	padding-right: 0.5%;
 }
-/* grid setup in ARMS headers */
-.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-headers {
-	grid-template-columns: 1fr 2em 3.2em 2.5em 2.5em 2.5em 2.5em 3em 1em 1em;
+/* specialization label and checkbox position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] {
+	grid-area: 5 / 1 / 5 / 6;
 }
-/* grid setup in ARMS repeating section */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem {
-	grid-template-columns: 1fr 2em 3.2em 2.5em 2.5em 2.5em 2.5em 3em 1em 1em;
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] span {
+	font-family: sans-serif;
 }
-/* position of notes */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem label[data-i18n-title='notes'],
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem h3[data-i18n='notes']{
-	grid-column: 1 / 6;
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] input {
+	position: static;
+	opacity: 1;
 }
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-collapse {
-	grid-column: 1 / 11;
+/* to make sure that inputs and selects don't spill over  */
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label > input[type='text'] {
+	width: 60%;
+}
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label > select {
+	width: 80%;
 }
 /* i-symbol position */
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem input.sheet-collapse-flag,
@@ -1151,121 +1154,122 @@ div.sheet-matrix-device .sheet-matrixFirewall {
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem input.sheet-settings-flag + span.sheet-pictos {
 	grid-area: 1 / 10 / 1 / 11;
 }
+
+/* RANGED WEAPONS */
+/* grid setup */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-headers,
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem,
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings {
+	grid-template-columns: 1fr 2em 3.2em 2.5em 2.5em 2.5em 2.5em 3em 1em 1em;
+}
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings,
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-collapse,
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem label[data-i18n-title='notes'],
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem h3[data-i18n='notes'] {
 	grid-column: 1 / 11;
-	align-items: center;
-	grid-template-columns: repeat(5, 19%);
-}
-/* to make sure that inputs and selects don't spill over  */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label > input[type='text'] {
-	width: 60%;
-}
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label > select {
-	width: 80%;
-}
-/* position of weapon name input */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings input[name="attr_weapon"] {
-	grid-area: 1 / 1 / 1 / 5;
 }
 /* damage input position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title="damage"] {
-	grid-area: 2 / 1 / 2 / 3;
+/* spans over the Mode select row because we don't need to have mode select in settings */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-range div.repitem div.sheet-settings input[name="attr_damage"] {
+	grid-area: 1 / 2 / 1 / 4;
 }
-/* ammo input position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title="ammo"] {
-	grid-area: 2 / 3 / 2 / 5;
+/* skill select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title="skill"]{
+	grid-area: 2 / 1 / 2 / 4;
 }
-/* attack rating label */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title="attackrating"] {
-	grid-area: 3 / 1 / 3 / 2;
+/* attribute select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title="attribute"]{
+	grid-area: 2 / 4 / 2 / 7;
 }
-/* close ar input */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings input[name="attr_close"] {
-	grid-area: 3 / 2 / 3 / 3;
-}
-/* near ar input */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings input[name="attr_near"] {
-	grid-area: 3 / 3 / 3 / 4;
-}
-/* far ar input */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings input[name="attr_far"] {
-	grid-area: 3 / 4 / 3 / 5;
-}
-/* extreme ar input */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings input[name="attr_extreme"] {
-	grid-area: 3 / 5 / 3 / 5;
-}
-/* skill label and select position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='skill'] {
-	grid-area: 4 / 1 / 4 / 3;
-}
-/* modifier label and input position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='modifier'] {
-	grid-area: 4 / 3 / 4 / 4;
-	width: auto;
-}
-/* attribute label and select position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='attribute'] {
-	grid-area: 4 / 4 / 4 / 6;
-}
+/* width of skill select to fit just barely into the grid cell */
 .sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='attribute'] > select {
-	width: 65%
+	width: 55%;
 }
-/* specialization label and checkbox position */
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] {
-	grid-area: 5 / 1 / 5 / 5;
+/* dicepool modifier position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-range div.repitem div.sheet-settings label[data-i18n-title="modifier"]{
+	grid-area: 2 / 7 / 2 / 10;
 }
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] span {
-	font-family: sans-serif;
+/* specialization radio select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-range div.repitem div.sheet-settings label[data-i18n-title="specialization"]{
+	grid-area: 3 / 1 / 3 / 10;
 }
-.sheet-pc div.sheet-arms div.sheet-weapons div.repitem div.sheet-settings label[data-i18n-title='specialization'] input {
-	position: static;
-	opacity: 1;
+/* primary select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-range div.repitem div.sheet-settings label[data-i18n-title="primary"]{
+	grid-area: 4 / 1 / 4 / 11;
 }
+
+/* ~ MELEE WEAPONS ~ */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.sheet-headers h2,
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem button,
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem > span,
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem div.sheet-settings > input[type="number"],
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem div.sheet-settings > input[type="text"] {
+	grid-column: span 2;
+	width: 100%;
+}
+/* specialization radio select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem div.sheet-settings label[data-i18n-title="specialization"]{
+	grid-area: 2 / 1 / 2 / 7;
+}
+/* dicepool modifier position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem div.sheet-settings label[data-i18n-title="modifier"]{
+	grid-area: 2 / 7 / 2 / 10;
+}
+/* primary select position */
+.sheet-pc div.sheet-arms div.sheet-weapons div.sheet-weapon-melee div.repitem div.sheet-settings label[data-i18n-title="primary"]{
+	grid-area: 3 / 1 / 3 / 11;
+}
+
 
 /* ~ ARMOR ~ */
 /* grid setup for armor section headers */
 .sheet-pc div.sheet-arms div.sheet-armor div.sheet-headers {
-	grid-template-columns: 30% 3.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em;
+	grid-template-columns: 1fr 2.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.sheet-headers h2:nth-of-type(1n+2) {
+	text-transform: none;
+	font-size: larger;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem span[name="attr_name"]{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-flag-primary[value="primary"] + span[name="attr_name"]{
+	font-weight: bold;
+	color: #610b0d;
 }
 .sheet-pc div.sheet-arms div.sheet-armor div.repitem {
-	grid-template-columns: 30% 3.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em;
+	grid-template-columns: 1fr 2.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em;
 }
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem label[data-i18n-title='notes'],
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem h3[data-i18n='notes'],
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-collapse {
-      grid-column: 1 / 11; }
-      .sheet-pc div.sheet-arms div.sheet-armor div.repitem label[data-i18n-title='notes'] span[name='attr_notes'],
-      .sheet-pc div.sheet-arms div.sheet-armor div.repitem h3[data-i18n='notes'] span[name='attr_notes'],
-      .sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-collapse span[name='attr_notes'] {
-        white-space: pre-line; }
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag {
-      grid-area: 1 / 9 / 1 / 10; }
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.sheet-pictos, .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-settings-toggle input[type='checkbox'].sheet-collapse-flag + span, .sheet-settings-toggle .sheet-pc div.sheet-arms div.sheet-armor div.repitem input[type='checkbox'].sheet-collapse-flag + span,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-settings-flag input[type='checkbox'].sheet-collapse-flag + span,
-    .sheet-settings-flag .sheet-pc div.sheet-arms div.sheet-armor div.repitem input[type='checkbox'].sheet-collapse-flag + span, .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-flag-primary + div > input.sheet-collapse-flag + span, .sheet-pc div.sheet-arms div.sheet-armor div.repitem .repcontrol input.sheet-collapse-flag + span.repcontrol_edit:after, .repcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.repcontrol_edit:after,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .repcontrol input.sheet-collapse-flag + span.repcontrol_add:after,
-    .repcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.repcontrol_add:after, .sheet-pc div.sheet-arms div.sheet-armor div.repitem .itemcontrol input.sheet-collapse-flag + span.repcontrol_del, .itemcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.repcontrol_del {
-      grid-area: 1 / 9 / 1 / 10; }
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.sheet-pictos,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-settings-toggle input[type='checkbox'].sheet-settings-flag + span,
-    .sheet-settings-toggle .sheet-pc div.sheet-arms div.sheet-armor div.repitem input[type='checkbox'].sheet-settings-flag + span,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-settings-flag input[type='checkbox'].sheet-settings-flag + span,
-    .sheet-settings-flag .sheet-pc div.sheet-arms div.sheet-armor div.repitem input[type='checkbox'].sheet-settings-flag + span,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .sheet-flag-primary + div > input.sheet-settings-flag + span,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .repcontrol input.sheet-settings-flag + span.repcontrol_edit:after,
-    .repcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.repcontrol_edit:after,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .repcontrol input.sheet-settings-flag + span.repcontrol_add:after,
-    .repcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.repcontrol_add:after,
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem .itemcontrol input.sheet-settings-flag + span.repcontrol_del,
-    .itemcontrol .sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.repcontrol_del {
-      grid-area: 1 / 10 / 1 / 11; }
-    .sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-settings {
-      grid-column: 1 / 11;
-      grid-template-columns: 30% 3.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em; }
-      .sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-settings div.sheet-row {
-        grid-column: 1 / 11; }
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem label[data-i18n-title='notes'],
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem h3[data-i18n='notes'],
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-collapse {
+	grid-column: 1 / 10; }
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem label[data-i18n-title='notes'] span[name='attr_notes'],
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem h3[data-i18n='notes'] span[name='attr_notes'],
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-collapse span[name='attr_notes'] {
+	white-space: pre-line;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag,
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.sheet-pictos{
+	grid-area: 1 / 8 / 1 / 9;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-collapse-flag + span.sheet-pictos,
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.sheet-pictos {
+	margin-top: -2px;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag,
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem input.sheet-settings-flag + span.sheet-pictos{
+	grid-area: 1 / 9 / 1 / 10;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-settings {
+	grid-column: 1 / 10;
+	grid-template-columns: 36.5% 2.5em 2.5em 2.5em 2.5em 2.5em 2.5em 1em 1em;
+}
+.sheet-pc div.sheet-arms div.sheet-armor div.repitem div.sheet-settings div.sheet-row {
+	grid-column: 1 / 10;
+}
 		
 /* ~~~ AUGS ~~~ */
   .sheet-pc div.sheet-augs div.sheet-headers {
@@ -1972,11 +1976,12 @@ input.sheet-settings-toggle:checked ~ .sheet-cc-armor .sheet-cc-armor-mods div.s
 .sheet-cc-row {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: center;
 }
 /* roll button size */
 .sheet-cc-row button[type='roll'] {
 	margin-top: 5px;
+	margin-bottom: 5px;
 	width: 57%;
 	height: 22px;
 }
@@ -2021,7 +2026,9 @@ input.sheet-settings-toggle:checked ~ .sheet-cc-armor .sheet-cc-armor-mods div.s
 .sheet-cc-row button[type='roll'] > span,
 .sheet-cc-row h3 + span {
 	display: inline-block;
-	margin-left: 1%;
+}
+.sheet-cc-row h3 + span {
+	font-size: smaller;
 }
 .sheet-cc-row span[name*='ammo'] {
 	width: 4%;
@@ -2674,13 +2681,13 @@ input.sheet-spell-toggle {
   display: inline-block;
   width: 100%; }
 
-span.sheet-pictosC {
+.sheet-pictosC {
   font-family: 'Pictos Custom'; }
 
-span.sheet-pictos3 {
+.sheet-pictos3 {
   font-family: 'Pictos Three'; }
 
-span.sheet-d6 {
+.sheet-d6 {
   font-family: 'dicefontd6'; }
 
 /******************************************************************************************/
