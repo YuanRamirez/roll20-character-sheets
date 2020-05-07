@@ -370,6 +370,7 @@
 					</div>
 				</div>
 				<!-- ~~:+: Unarmed AR :+:~~ -->
+				<!-- TODO make Unarmed Fighting a default primary entry in Arms - Melee and remove this -->
 				<label data-i18n="unarmedar">Unarmed AR</label>
 				<div class="attr-und">
 					<div class="settings">
@@ -490,7 +491,8 @@
 					<span name="attr_notes"></span>
 				</div>
                 <div class="settings">
-                  <select class="skill-select" name="attr_skill" value="Astral" title="@{repeating_active_${x}_skill}">
+                  <select class="skill-select" name="attr_skill" title="@{repeating_active_${x}_skill}">
+					<option value="" data-i18n="selectskill" selected disabled>Select a Skill</option>
 					<option value="Astral" data-i18n="astral">astral</option>
 					<option value="Athletics" data-i18n="athletics">athletics</option>
 					<option value="Biotech" data-i18n="biotech">biotech</option>
@@ -512,11 +514,11 @@
 					<option value="Tasking" data-i18n="tasking">tasking</option>
                   </select>
                   <label data-i18n-title="rating" title="rating">
-                    <input name="attr_rating" min="0" placeholder="0" type="number" title="@{repeating_active_${x}_rating}"/>
+                    <input name="attr_rating" min="0" placeholder="#" type="number" title="@{repeating_active_${x}_rating}"/>
                   </label>
                   <label data-i18n-title="ratingmodifier" title="Rating Modifier">
 					<span data-i18n="ratingmodifier">Rating Modifier</span>
-                    <input name="attr_rating_modifier" placeholder="0" type="number" title="@{repeating_active_${x}_rating_modifier}"/>
+                    <input name="attr_rating_modifier" placeholder="#" type="number" title="@{repeating_active_${x}_rating_modifier}"/>
                   </label>
                   <label data-i18n-title="specialization" title="specialization">
 					<span data-i18n="specialization">specialization</span>
@@ -1043,7 +1045,7 @@
         </div>
       </div>
     </div>
-	<!-- TODO: get rid of 'primary' armor and make it 'active' armor for more flexibility /w regards to armor parts like helmets and shields -->
+	<!-- TODO: get rid of 'primary' armor and make it 'active' or 'equipped' armor for more flexibility /w regards to armor parts like helmets and shields -->
     <div class="pc-row armor">
       <div class="header right-header">
         <h1 data-i18n="armor">Armor</h1>
@@ -1136,6 +1138,7 @@
       </div>
     </div>
   </div>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF THE GEAR TAB  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <div class="gear pc-col">
     <div class="pc-row">
       <div class="header right-header">
@@ -1183,6 +1186,11 @@
       </div>
     </div>
   </div>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF THE MAGIC TAB  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- Might make sense to separate the magic tab into three rows: Astral Combat, Spells/Prep/Rituals, Powers -->
+  <!-- Astral Combat might show Astral Initiative - could be removed from attributes? - Astral Defense rating, a copy of the condition monitor and stuff like Spellcasting Tradition - with corresponding attribute - etc. -->
+  <!-- Spells/Prep/Rituals as before -->
+  <!-- Powers as before -->
   <div class="magic pc-col">
     <div class="pc-row spell-box">
       <div class="header right-header">
@@ -1211,8 +1219,10 @@
       </div>
       <div class="border-box">
         <div class="pc-box medium-box">
-          <button data-i18n="drain" name="roll_drain" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{drain_attribute_1}+@{drain_attribute_2}+@{drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"></button>
-          <select class="attribute-select" name="attr_drain_attribute_1" title="@{drain_attribute_1}">
+          <button data-i18n="drain" name="roll_spell_drain" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{spell_drain_attribute_1}+@{spell_drain_attribute_2}+@{spell_drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"></button>
+		  <!-- does it make sense to let users select any attribute or should it be limited to the attributes that are linked to drain according to the rules? -->
+		  <!-- one of these attributes should be the spellcasting tradition attribute -->
+          <select class="attribute-select" name="attr_spell_drain_attribute_1" title="@{spell_drain_attribute_1}">
             <option data-i18n="body" value="@{body}">Body</option>
             <option data-i18n="agility" value="@{agility}">Agility</option>
             <option data-i18n="reaction" value="@{reaction}">Reaction</option>
@@ -1223,8 +1233,9 @@
             <option data-i18n="charisma" value="@{charisma}">Charisma</option>
             <option data-i18n="magic" value="@{magic}">Magic</option>
             <option data-i18n="resonance" value="@{resonance}">Resonance</option>
-          </select><span>+</span>
-          <select class="attribute-select" name="attr_drain_attribute_2" title="@{drain_attribute_2}">
+          </select>
+		  <span>+</span>
+          <select class="attribute-select" name="attr_spell_drain_attribute_2" title="@{spell_drain_attribute_2}">
             <option data-i18n="body" value="@{body}">Body</option>
             <option data-i18n="agility" value="@{agility}">Agility</option>
             <option data-i18n="reaction" value="@{reaction}">Reaction</option>
@@ -1238,7 +1249,7 @@
           </select>
           <h3 data-i18n="modifier">modifier</h3>
           <label data-i18n-title="modifier" title="modifier">
-            <input name="attr_drain_modifier" title="@{drain_modifier}" type="number" value="0"/>
+            <input name="attr_spell_drain_modifier" title="@{spell_drain_modifier}" type="number" value="0"/>
           </label>
           <input class="magic-toggle" name="attr_magic_toggle" type="hidden" value="spells"/>
           <div class="row-long headers">
@@ -1252,36 +1263,47 @@
             <div class="rows repeating-container">
               <fieldset class="repeating_spell">
                 <input name="attr_dicepool" type="hidden" value="0"/>
-                <button class="display-none" name="roll_drain" type="roll" value="@{gm_toggle} &amp;{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{drain_attribute_1}+@{drain_attribute_2}+@{drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6&gt;5@{explode_toggle}]]}}"></button>
-                <button name="roll_spell" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{name}}}{{base=^{magic}}}{{dice=[[((@{skill}+@{dicepool}+@{magic})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{combat_type}?{Force|}}}{{drain=[[?{Force|}+(@{drain})]] [f](~repeating_spell_drain)}}"><span name="attr_name"></span></button><span class="text-center" name="attr_type"></span><span class="text-center" name="attr_range"></span><span class="text-center" name="attr_duration"></span><span class="text-center" name="attr_drain"></span>
+                <button class="display-none" name="roll_drain" type="roll" value="@{gm_toggle} &amp;{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{spell_drain_attribute_1}+@{spell_drain_attribute_2}+@{spell_drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"></button>
+				<!--TODO: check rules as to how much does forcing a spell increase drain. Pretty sure it's drain = force*2 + spell_drain-->
+                <button name="roll_spell" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{wound=[[@{wounds_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=@{name}}}{{base=^{magic}}}{{dice=[[((@{skill}+@{dicepool}+@{magic})+@{wounds_toggle}+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}{{desc=@{combat_type}?{Force|0}}}{{drain=[[?{Force|0}+(@{drain})]] [f](~repeating_spell_drain)}}">
+					<span name="attr_name"></span>
+				</button>
+				<span class="text-center" name="attr_type"></span>
+				<span class="text-center" name="attr_range"></span>
+				<span class="text-center" name="attr_duration"></span>
+				<span class="text-center" name="attr_drain"></span>
                 <input class="collapse-flag" name="attr_display_flag" type="checkbox" checked="checked"/><span class="pictos">i</span>
                 <input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/><span class="pictos">x</span>
                 <div class="collapse"><span name="attr_notes"></span></div>
                 <div class="settings">
                   <label data-i18n-title="name" title="Name">
-                    <input name="attr_name" placeholder="Fireball" title="@{repeating_spell_${x}_name}" type="text"/>
+                    <input name="attr_name" data-i18n-placeholder="spellname" title="@{repeating_spell_${x}_name}" type="text"/>
                   </label>
+				  <!-- TODO: check for new spell types -->
                   <select name="attr_type" title="@{repeating_spell_${x}_type}" value="physical">
                     <option data-i18n="mana" value="Mana">mana</option>
-                    <option data-i18n="physical" value="Physical" selected="selected">physical</option>
+                    <option data-i18n="physical" value="Physical" selected>physical</option>
                   </select>
-                  <select name="attr_range" title="@{repeating_spell_${x}_range}" value="los">
-                    <option data-i18n="los" value="LOS" selected="selected">los</option>
+				  <!-- TODO: check spell ranges in SR6 -->
+                  <select name="attr_range" title="@{repeating_spell_${x}_range}" value="LOS">
+                    <option data-i18n="los" value="LOS" selected>los</option>
                     <option data-i18n="los (a)" value="LOS (A)">los (a)</option>
                     <option data-i18n="special" value="Special">special</option>
                     <option data-i18n="t" value="T">t</option>
                     <option data-i18n="t (a)" value="T (A)">t (a)</option>
                   </select>
+				  <!-- check spell durations in SR6 -->
                   <select name="attr_duration" title="@{repeating_spell_${x}_duration}" value="instant">
-                    <option data-i18n="instant" value="Instant" selected="selected">instant</option>
+                    <option data-i18n="instant" value="Instant" selected>instant</option>
                     <option data-i18n="permanent" value="Permanent">permanent</option>
                     <option data-i18n="special" value="Special">special</option>
                     <option data-i18n="sustained" value="Sustained">sustained</option>
                   </select>
                   <label data-i18n-title="drain" title="Drain">
-                    <input name="attr_drain" placeholder="-1" title="@{repeating_spell_${x}_drain}" type="number"/>
+                    <input name="attr_drain" placeholder="#" title="@{repeating_spell_${x}_drain}" type="number"/>
                   </label>
                   <div class="row">
+					<!-- TODO: check rules-->
                     <h3 data-i18n="category">Category</h3>
                     <select name="attr_category" title="@{repeating_spell_${x}_category}" value="Combat">
                       <option data-i18n="combat" value="Combat">combat</option>
@@ -1290,23 +1312,29 @@
                       <option data-i18n="illusion" value="Illusion">illusion</option>
                       <option data-i18n="manipulation" value="Manipulation">manipulation</option>
                     </select>
+					<!-- not sure what a force-spell is. maybe sr6 doesnt have those anymore? -->
+					<!-- TODO: check rules -->
                     <h3 data-i18n="combat">Combat</h3>
                     <select name="attr_combat_type" title="@{repeating_spell_${x}_combat_type}" value="force">
                       <option data-i18n="force" value="Force " selected="selected">force</option>
                       <option data-i18n="direct" value="Direct, Force ">direct</option>
                       <option data-i18n="indirect" value="Indirect, Force ?{Force|}, AP -">indirect</option>
                     </select>
+					<!-- TODO: check sr6 rules. I'm pretty sure damage is now calculated MagicAttribute/2 + successes + force -->
+					<!-- so maybe users should be able to select damage type here and enter some dmg mod but nothing else? -->
                     <h3 data-i18n="damage">Damage</h3>
                     <label data-i18n-title="damage" title="Damage">
                       <input name="attr_damage" placeholder="P" title="@{repeating_spell_${x}_damage}" type="text"/>
                     </label>
                   </div>
                   <div class="row">
+					<!-- TODO: check rules for casting spells. Pretty sure its handled via Sorcery only -->
                     <h3 data-i18n="skill">Skill</h3>
                     <select name="attr_skill" title="@{repeating_spell_${x}_skill}" value="@{spellcasting}">
                       <option data-i18n="sorcerygroup" value="@{sorcery}">sorcerygroup</option>
                       <option data-i18n="spellcasting" value="@{spellcasting}" selected="selected">spellcasting</option>
                     </select>
+					<!-- TODO: needs radio buttons -->
                     <h3 data-i18n="specialization">Specialization</h3>
                       <input name="attr_specialization" title="@{repeating_spell_${x}_specialization}" type="radio" value="2"/>
 					<h3 data-i18n="expertise">Expertise</h3>
@@ -1324,6 +1352,8 @@
               </fieldset>
             </div>
           </div>
+		  <!-- TODO: check rules about preps in regards to what spells can be used -->
+		  <!-- if you can use all your spells to create preps, maybe there's a way to link the repeating section above with the one here to save the user having to enter every spell twice -->
           <div class="magic-preps spellsForumlas">
             <div class="rows repeating-container">
               <fieldset class="repeating_preps">
@@ -1366,23 +1396,28 @@
                       <option data-i18n="illusion" value="Illusion">illusion</option>
                       <option data-i18n="manipulation" value="Manipulation">manipulation</option>
                     </select>
+					<!-- TODO: same as above -->
                     <h3 data-i18n="combat">Combat</h3>
                     <select name="attr_combat_type" title="@{repeating_preps_${x}_combat_type}" value="force">
                       <option data-i18n="force" value="Force " selected="selected">force</option>
                       <option data-i18n="direct" value="Direct, Force ">direct</option>
                       <option data-i18n="indirect" value="Indirect, Force ?{Force|}, AP -">indirect</option>
                     </select>
+					<!-- TODO: same as above -->
                     <h3 data-i18n="damage">Damage</h3>
                     <label data-i18n-title="damage" title="Damage">
                       <input name="attr_damage" placeholder="P" title="@{repeating_preps_${x}_damage}" type="text"/>
                     </label>
                   </div>
                   <div class="row">
+					<!-- TODO: I'm assuming this is entirely handled via "Enchanting" now. Which makes the select unnecessary -->
                     <h3 data-i18n="skill">Skill</h3>
                     <select name="attr_skill" title="@{repeating_preps_${x}_skill}" value="@{alchemy}">
                       <option data-i18n="enchantinggroup" value="@{enchanting}">enchantinggroup</option>
                       <option data-i18n="alchemy" value="@{alchemy}" selected="selected">alchemy</option>
                     </select>
+					<!-- TODO: needs radio buttons -->
+					<!-- if this uses enchanting + specialization we might have to rework skill specializations a little -->
                     <h3 data-i18n="specialization">Specialization</h3>
                       <input name="attr_specialization" title="@{repeating_preps_${x}_specialization}" type="radio" value="2"/>
 					<h3 data-i18n="expertise">Expertise</h3>
@@ -1413,22 +1448,22 @@
                 <input class="settings-flag" name="attr_flag" title="Settings toggle" type="checkbox" checked="checked"/><span class="pictos">x</span>
                 <div class="collapse"><span name="attr_notes"></span></div>
                 <div class="settings">
-                  <label data-i18n-title="name" title="name">
-                    <input name="attr_name" placeholder="Name" title="@{repeating_preperations_${x}_name}" type="text" value=""/>
+                  <label data-i18n-title="prepname">
+                    <input name="attr_name" data-i18n-placeholder="prepname" title="@{repeating_preperations_${x}_name}" type="text" value=""/>
                   </label>
-                  <label data-i18n-title="force" title="force">
-                    <input name="attr_force" placeholder="1" title="@{repeating_preperations_${x}_force}" type="number" value=""/>
+				  <!-- TODO: pretty sure this is fine but check rules anyway -->
+                  <label data-i18n-title="force">
+                    <input name="attr_force" placeholder="#" title="@{repeating_preperations_${x}_force}" type="number" value=""/>
                   </label>
                   <label data-i18n-title="potency" title="potency">
-                    <input name="attr_potency" placeholder="1" title="@{repeating_preperations_${x}_potency}" type="number" value=""/>
+                    <input name="attr_potency" placeholder="#" title="@{repeating_preperations_${x}_potency}" type="number" value=""/>
                   </label>
+				  <!-- TODO: check rules -->
                   <select name="attr_trigger" title="@{repeating_preperations_${x}_trigger}" value="Command">
-                    <optgroup label="Trigger">Trigger
-                      <option data-i18n="command" value="Command">command</option>
-                      <option data-i18n="contact" value="Contact" selected="selected">contact</option>
-                      <option data-i18n="time" value="Time">time</option>
-                      <option data-i18n="special" value="Special">special</option>
-                    </optgroup>
+                    <option data-i18n="command" value="Command" selected>command</option>
+                    <option data-i18n="contact" value="Contact">contact</option>
+                    <option data-i18n="time" value="Time">time</option>
+                    <option data-i18n="special" value="Special">special</option>
                   </select>
                   <h3 data-i18n="notes">notes</h3>
                   <label data-i18n-title="notes" title="notes">
@@ -1438,6 +1473,7 @@
               </fieldset>
             </div>
           </div>
+		  <!-- TODO: def. check rules -->
           <div class="magic-rituals">
             <div class="rows repeating-container">
               <fieldset class="repeating_ritual">
@@ -1448,6 +1484,7 @@
                 <div class="collapse"><span name="attr_notes"></span></div>
                 <div class="settings">
                   <label data-i18n-title="name" title="name">
+				  <!-- this placeholder sucks @$$ -->
                     <input name="attr_name" placeholder="Curse (MATERIAL LINK, SPELL)" title="@{@{repeating_undefined_${x}_name}" type="text"/>
                   </label>
                   <div class="rows">
@@ -1476,6 +1513,8 @@
         </div>
       </div>
     </div>
+	<!-- for adept powers it would be great if users could select whether a power is active or passive. -->
+	<!-- active powers can be rolled on or somethin and passive powers can be pushed to chat -->
     <div class="pc-row powers">
       <div class="header right-header">
         <h1 data-i18n="adeptpowers">Adept Powers or Other Abilities</h1>
@@ -1483,8 +1522,8 @@
       </div>
       <div class="border-box">
         <div class="pc-box medium-box">
-          <button data-i18n="drain" name="roll_drain" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{drain_attribute_1}+@{drain_attribute_2}+@{drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"></button>
-          <select class="attribute-select" name="attr_drain_attribute_1" title="@{drain_attribute_1}">
+          <button data-i18n="drain" name="roll_power_drain" type="roll" value="@{gm_toggle} &{template:rolls}{{mod=[[@{modifiers_toggle}]]}}{{edge=[[@{edge_toggle}]]}}{{header=^{drain}}}{{base=^{base}}}{{dice=[[((@{power_drain_attribute_1}+@{power_drain_attribute_2}+@{power_drain_modifier})+@{modifiers_toggle}+@{edge_toggle})d6>5@{explode_toggle}]]}}"></button>
+          <select class="attribute-select" name="attr_power_drain_attribute_1" title="@{power_drain_attribute_1}">
             <option data-i18n="body" value="@{body}" selected="selected">Body</option>
             <option data-i18n="agility" value="@{agility}">Agility</option>
             <option data-i18n="reaction" value="@{reaction}">Reaction</option>
@@ -1496,7 +1535,7 @@
             <option data-i18n="magic" value="@{magic}">Magic</option>
             <option data-i18n="resonance" value="@{resonance}">Resonance</option>
           </select><span>+</span>
-          <select class="attribute-select" name="attr_drain_attribute_2" title="@{drain_attribute_2}">
+          <select class="attribute-select" name="attr_power_drain_attribute_2" title="@{power_drain_attribute_2}">
             <option data-i18n="body" value="@{body}">Body</option>
             <option data-i18n="agility" value="@{agility}">Agility</option>
             <option data-i18n="reaction" value="@{reaction}">Reaction</option>
@@ -1510,7 +1549,7 @@
           </select>
           <h3 data-i18n="modifier">modifier</h3>
           <label data-i18n-title="modifier" title="modifier">
-            <input name="attr_drain_modifier" title="@{drain_modifier}" type="number" value="0"/>
+            <input name="attr_drain_modifier" title="@{power_drain_modifier}" type="number" value="0"/>
           </label>
           <div class="row-long headers">
             <h2 data-i18n="name">Name</h2>
@@ -1523,14 +1562,14 @@
               <div class="collapse"><span name="attr_notes"></span></div>
               <div class="settings">
                 <label data-i18n-title="name" title="name">
-                  <input name="attr_name" placeholder="name" title="@{repeating_powers_${x}_name}" type="text" value=""/>
+                  <input name="attr_name" data-i18n-placeholder="name" title="@{repeating_powers_${x}_name}" type="text" value=""/>
                 </label>
                 <label data-i18n-title="rating" title="rating">
-                  <input name="attr_rating" placeholder="rating" title="@{repeating_powers_${x}_rating}" type="number" value=""/>
+                  <input name="attr_rating" placeholder="#" title="@{repeating_powers_${x}_rating}" type="number" value=""/>
                 </label>
                 <h3 data-i18n="notes">notes</h3>
                 <label data-i18n-title="notes" title="notes">
-                  <textarea name="attr_notes" placeholder="Notes" title="@{repeating_powers_${x}_notes}" type="text" value=""></textarea>
+                  <textarea name="attr_notes" data-i18n-placeholder="notes" title="@{repeating_powers_${x}_notes}" type="text" value=""></textarea>
                 </label>
               </div>
             </fieldset>
@@ -1539,6 +1578,8 @@
       </div>
     </div>
   </div>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START OF THE MAGIC TAB  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- pretty sure this needs a bigger overhaul -->
   <div class="matrix pc-col">
     <div class="pc-row matrix-box">
       <div class="header right-header">
